@@ -8,39 +8,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 
-
-a = 0.2
-
-theta = np.linspace(-10,10,1000)
-
-variance = [1, 0.0001]
-
-for i in range(len(variance)):
-    alpha = variance[i] / theta ** 2
-
-
-    KL_std =  0.5 * np.log(1+ 1 / alpha )
-
-    plt.plot(theta, KL_std)
-    plt.plot(theta-a, KL_std)
-    plt.plot(theta+a, KL_std)
-    plt.xlim((-1,1))
-    plt.title('variance = {}'.format(variance[i]))
-    plt.show()
-
-a = 3
-theta = 0
-variance = 1
-q = np.random.normal(theta, variance ** (0.5), 3000)
-p1 = np.random.normal(theta, variance ** (0.5), 1000)
-p2 = np.random.normal(theta+a, variance ** (0.5), 1000)
-p3 = np.random.normal(theta-a, variance ** (0.5), 1000)
-p = np.concatenate((p1,p2,p3),0)
-plt.hist(p,bins=50,color='red')
-plt.show()
-plt.hist(q,bins=50,color='blue')
-plt.show()
-
 def gaussian_dist(x, mean = 0, std_err = 1):
     y = np.exp(-1 * 0.5 * (x-mean) ** 2 / std_err ** 2 ) / (np.sqrt(2 * np.pi) * std_err)
     return y
@@ -70,6 +37,7 @@ def MCMCforTwoGauss(para1 = [0,1], para2 = [3,2],sample_num = 30000):
     print(D_mc) 
 
 def KL4twogauss(para1 = [0,1], para2 = [3,2]):
+    "Analytically calculated"
     mean1 = para1[0]
     mean2 = para2[0]
     std1 = para1[1]
@@ -95,7 +63,7 @@ def MCforGaussandGMM(GMM_scale_num = 3,GMM_mean = [1,0,-1],GMM_std = [1,1,1],
     
 def samplefromGMM(N = 30000, 
                   GMM_scale_num = 3,GMM_mean = [1,0,-1],GMM_std = [1,1,1]):
-    
+    "Return N samples from GMM"
     if np.mod(N,GMM_scale_num):
         raise ValueError('Sample numbers cannot be well divided by GMM scale numbers!')
     else:
@@ -112,7 +80,6 @@ def samplefromGMM(N = 30000,
 p = samplefromGMM(GMM_mean = [3,0,-1])
 plt.hist(p,bins=50,color='red')
 plt.show()  
-    
 
 def MCforTwoGMM(GMM_scale_num1 = 3,GMM_mean1 = [1,0,-1],GMM_std1 = [1,1,1],
                 GMM_scale_num2 = 3,GMM_mean2 = [1,0,-1],GMM_std2 = [1,1,1],
@@ -134,15 +101,3 @@ def MCforTwoGMM(GMM_scale_num1 = 3,GMM_mean1 = [1,0,-1],GMM_std1 = [1,1,1],
     return D_mc
     
     
-    
-    
-    
-    
-    MCforGaussandGMM(1,[3],[2],[0,1],3000)
-    
-    x_sample = np.linspace(-10,10,10000)
-    y = GMM(x_sample,mean = [-2,0,2])
-    plt.scatter(x_sample,y)
-
-
-KL4gauss()
