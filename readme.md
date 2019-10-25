@@ -1,5 +1,14 @@
-This is for generate a Gauss distribution and GMM distribution by MCMC.
+This is for 
 
-calculate the KL_divergence between two Gauss using MCMC and using the belowing equation analytically.
+* generate a Gauss distribution and GMM distribution by MCMC.
 
-$KL(p,q) = \frac{1}{2}$
+* calculate the KL_divergence between two Gauss using MCMC and using the belowing equation analytically.
+
+$KL(p,q) =$
+
+* calculate the KL_divergence between a Gauss and a GMM using MCMC
+
+* calculate the KL_divergence betwwn two GMM
+
+
+
